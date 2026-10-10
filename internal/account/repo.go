@@ -57,7 +57,7 @@ func (r *Repo) GetByID(ctx context.Context, id uuid.UUID) (*Account, error) {
 
 func (r *Repo) GetByClientID(ctx context.Context, clientID uuid.UUID) ([]Account, error) {
 	const query = `
-		SELECT (id, client_id, balance, created_at)
+		SELECT id, client_id, balance, created_at
 		FROM account
 		WHERE client_id = $1
 		LIMIT 50;
@@ -66,6 +66,10 @@ func (r *Repo) GetByClientID(ctx context.Context, clientID uuid.UUID) ([]Account
 	rows, err := r.db.QueryContext(ctx, query,
 		clientID,
 	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
 
 	accounts := make([]Account, 0)
 	for rows.Next() {

@@ -3,6 +3,7 @@ package client
 import (
 	"context"
 	"database/sql"
+	"uuid"
 )
 
 type Repo struct {
@@ -30,4 +31,12 @@ func (r *Repo) NewClient(ctx context.Context, c *Client) error {
 	).Scan(
 		&c.CreatedAt,
 	)
+}
+
+func (r *Repo) GetByID(ctx context.Context, id uuid.UUID) (*Client, error) {
+	return nil, nil
+}
+
+func (r *Repo) GetByEmail(ctx context.Context, email string) (*Client, error) {
+	return nil, nil
 }

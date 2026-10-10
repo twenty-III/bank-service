@@ -9,7 +9,7 @@ import (
 type Account struct {
 	ID        uuid.UUID
 	ClientID  uuid.UUID
-	Balance   float64
+	Balance   int64 // stored in paise
 	CreatedAt time.Time
 }
 

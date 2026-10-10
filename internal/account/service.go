@@ -27,7 +27,7 @@ func (s *Service) NewAccount(ctx context.Context, clientID uuid.UUID) (*Account,
 		return nil, fmt.Errorf("failed to create account: %w", err)
 	}
 
-	return a, err
+	return a, nil
 }
 
 func (s *Service) GetByID(ctx context.Context, id uuid.UUID) (*Account, error) {
