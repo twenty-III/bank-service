@@ -34,6 +34,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	
 
 	// main router of our app
 	mux := http.NewServeMux()
@@ -57,6 +58,7 @@ func main() {
 		ErrorLog: slog.NewLogLogger(slog.Default().Handler(), slog.LevelError),
 	}
 
+	slog.Info("server running", "port", cfg.PORT)
 	err = server.ListenAndServe()
 	if err != nil {
 		panic(err)
