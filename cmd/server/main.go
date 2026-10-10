@@ -1,12 +1,25 @@
 package main
 
 import (
+	"bank/internal/config"
 	"bank/internal/logger"
-	"log/slog"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	logger.Init("production")
+	// load environment variables from .env file
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
 
-	slog.Info("hello from slog")
+	// load all the configs into Config struct
+	cfg, err := config.Load()
+	if err != nil {
+		panic(err)
+	}
+
+	// initialize global logger
+	logger.Init(cfg.Env)
 }
