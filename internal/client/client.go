@@ -20,5 +20,6 @@ type ClientRepo interface {
 }
 
 type AccountProvider interface {
+	NewAccount(ctx context.Context, clientID uuid.UUID) (*account.Account, error)
 	GetByClientID(ctx context.Context, clientID uuid.UUID) ([]account.Account, error)
 }

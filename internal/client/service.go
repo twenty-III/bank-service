@@ -43,12 +43,11 @@ func (s *Service) NewClient(ctx context.Context, name, email, password string) (
 }
 
 func (s *Service) GetAllAccounts(ctx context.Context, clientID uuid.UUID) ([]account.Account, error) {
-	accounts, err := s.accountProvider.GetByClientID(ctx, clientID)
-	if err != nil {
-		return nil, fmt.Errorf("failed to get all accounts: %w", err)
-	}
+	return s.accountProvider.GetByClientID(ctx, clientID)
+}
 
-	return accounts, nil
+func (s *Service) NewAccount(ctx context.Context, clientID uuid.UUID) (*account.Account, error) {
+	return s.accountProvider.NewAccount(ctx, clientID)
 }
 
 func hashPassword(p string) ([]byte, error) {
